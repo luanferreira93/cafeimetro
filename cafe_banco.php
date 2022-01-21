@@ -3,10 +3,11 @@ function listacafe($conexao)
 {
     $cafes = [];
 
-    $query = 'SELECT * FROM cafe';
+    $query = 'SELECT c.id,c.nome AS nome_cafe,c.descricao, t.nome AS nome_tipo FROM cafe c INNER JOIN tipos t ON (c.tipo_id=t.id)';
     $resultado = mysqli_query($conexao, $query);
     while($cafe = mysqli_fetch_array($resultado)){
         array_push($cafes,$cafe);
     }
     return $cafes;
 }
+
