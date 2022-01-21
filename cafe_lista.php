@@ -1,6 +1,7 @@
 <?php
 include 'conecta.php';
 include 'head_menu.php';
+include 'cafe_banco.php';
 ?>
 
 
@@ -15,9 +16,8 @@ include 'head_menu.php';
     <tbody>
         <tr>
             <?php
-            $query = 'SELECT * FROM cafe';
-            $resultado = mysqli_query($conexao, $query);
-            while ($cafe = mysqli_fetch_assoc($resultado)) {
+            $cafes = listacafe($conexao);
+            foreach($cafes as $cafe){
             ?>
         <tr>
             <td><?= $cafe['nome'] ?></td>
