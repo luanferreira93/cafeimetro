@@ -1,8 +1,3 @@
-<?php
-$conexao = mysqli_connect('localhost', 'root', '', 'cafeimentro');
-$query = 'SELECT * FROM cafe';
-$resultado = mysqli_query($conexao, $query);
-?>
 <!DOCTYPE html>
 <html lang="pt_BR">
 

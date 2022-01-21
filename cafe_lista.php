@@ -1,4 +1,5 @@
 <?php
+include 'conecta.php';
 include 'head_menu.php';
 ?>
 
@@ -14,6 +15,8 @@ include 'head_menu.php';
     <tbody>
         <tr>
             <?php
+            $query = 'SELECT * FROM cafe';
+            $resultado = mysqli_query($conexao, $query);
             while ($cafe = mysqli_fetch_assoc($resultado)) {
             ?>
         <tr>
