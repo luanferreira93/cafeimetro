@@ -4,7 +4,6 @@ include 'head_menu.php';
 include 'cafe_banco.php';
 ?>
 
-
 <table class="table table-striped table-bordered">
     <tbody>
         <tr>
@@ -17,13 +16,13 @@ include 'cafe_banco.php';
             <td><?= $cafe['descricao'] ?></td>
             <td><?= $cafe['nome_tipo'] ?></td>
             <td>
-                <form name="form_altera" action="cafe_remove.php" method="POST">
+                <form name="form_altera" action="cafe_form_edita.php" method="POST">
                     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
                     <button class="btn btn-primary">Editar</button>
                 </form>
             </td>
             <td>
-            <form name="form_remove" action="cafe_form_edita.php" method="POST">
+            <form name="form_remove" action="cafe_remove.php" method="POST">
                     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
                     <button class="btn btn-danger">Remover</button>
                 </form>

@@ -11,3 +11,8 @@ function listacafe($conexao)
     return $cafes;
 }
 
+function buscaCafeID($conexao,$id){
+    $query = "SELECT id, nome, descricao, tipo_id FROM cafe WHERE id = {$id}";
+    $resultado = mysqli_query($conexao, $query);
+    return mysqli_fetch_assoc($resultado);
+}
