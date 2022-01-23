@@ -1,3 +1,3 @@
 <?php
-header('location:head_menu.php');
-die();
+include 'head_menu.php';
+include 'footer.php';

@@ -1,6 +1,6 @@
-create database if not exists cafeimentro character set utf8 collate utf8_general_ci;
+create database if not exists cafeimetro character set utf8 collate utf8_general_ci;
 
-use cafeimentro;
+use cafeimetro;
 
 create table tipos(
     id integer auto_increment primary key,
