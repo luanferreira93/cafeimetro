@@ -7,7 +7,7 @@ include 'tipo_banco.php';
 $tipos = listaTipo($conexao);
 ?>
 <h1>Adiciona Café</h1>
-<form action="cafe_edita.php" method="POST">
+<form action="cafe_adiciona.php" method="POST">
     <table class="table">
         <tr>
             <td>Nome</td>
@@ -24,7 +24,7 @@ $tipos = listaTipo($conexao);
         <tr>
             <td>Tipo</td>
             <td>
-                <select class="form-control" name="tipo_id" id="">
+                <select class="form-control" name="tipo_id">
                     <?php
                     foreach ($tipos as $tipo) {
                     ?>

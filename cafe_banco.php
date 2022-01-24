@@ -28,3 +28,9 @@ function removeCafe($conexao,$id){
     $resultado = mysqli_query($conexao, $query);
     return $resultado;
 }
+
+function adiciona_cafe($conexao,$nome,$descricao,$tipo_id){
+    $query = "INSERT INTO cafe(nome,descricao,tipo_id) VALUES('{$nome}','${descricao}',{$tipo_id})";
+    $resultado = mysqli_query($conexao, $query);
+    return $resultado;
+}
