@@ -2,11 +2,14 @@
 include 'conecta.php';
 include 'cafe_banco.php';
 include 'head_menu.php';
+include 'tipo_banco.php';
+
 $id = $_POST['id'];
 $cafe = buscaCafeID($conexao, $id);
+$tipos = listaTipo($conexao);
 ?>
 <h1>Altera Café</h1>
-<form action="cafe-edita.php" method="POST">
+<form action="cafe_edita.php" method="POST">
     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
     <table class="table">
         <tr>
@@ -25,7 +28,14 @@ $cafe = buscaCafeID($conexao, $id);
             <td>Tipo</td>
             <td>
                 <select class="form-control" name="tipo_id" id="">
-                    <option value="<?= $cafe['tipo_id'] ?>"></option>
+                    <?php
+                    foreach ($tipos as $tipo) {
+                        $seleciona = ($cafe['tipo_id'] == $tipo['id'])?"selected='selected'":'';
+                    ?>
+                        <option value="<?= $tipo['id'] ?>" <?=$seleciona?>><?= $tipo['nome'] ?></option>
+                    <?php
+                    }
+                    ?>
                 </select>
             </td>
         </tr>

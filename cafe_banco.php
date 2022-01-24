@@ -16,3 +16,9 @@ function buscaCafeID($conexao,$id){
     $resultado = mysqli_query($conexao, $query);
     return mysqli_fetch_assoc($resultado);
 }
+
+function alteraCafe($conexao,$id,$nome,$descricao,$tipo_id){
+    $query = "UPDATE cafe SET nome='{$nome}',descricao='{$descricao}',tipo_id={$tipo_id} WHERE id = {$id}";
+    $resultado = mysqli_query($conexao, $query);
+    return $resultado;
+}
