@@ -22,3 +22,9 @@ function alteraCafe($conexao,$id,$nome,$descricao,$tipo_id){
     $resultado = mysqli_query($conexao, $query);
     return $resultado;
 }
+
+function removeCafe($conexao,$id){
+    $query = "DELETE FROM cafe WHERE id = {$id}";
+    $resultado = mysqli_query($conexao, $query);
+    return $resultado;
+}

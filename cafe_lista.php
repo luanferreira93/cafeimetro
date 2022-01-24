@@ -24,7 +24,7 @@ include 'cafe_banco.php';
             <td>
             <form name="form_remove" action="cafe_form_remove.php" method="POST">
                     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
-                    <button class="btn btn-danger">Remover</button>
+                    <button class="btn btn-danger">Excluir</button>
                 </form>
             </td>
         </tr>

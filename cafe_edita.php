@@ -11,11 +11,11 @@ $tipo_id = $_POST['tipo_id'];
 $alterou = alteraCafe($conexao,$id,$nome,$descricao,$tipo_id);
 if($alterou){
 ?>
-    <p class="text-success">Alteração feita com sucesso!.</p>
+    <h1 class="text-success">Alteração feita com sucesso!</h1>
 <?php
 }else{
 ?>
-    <p class="text-danger">Erro. Não foi possivel fazer as alterações.</p>
+    <h1 class="text-sucess">Erro. Não foi possivel fazer alterção</h1>
 <?php
 }
 include 'footer.php';
