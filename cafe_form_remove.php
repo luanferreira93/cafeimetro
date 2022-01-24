@@ -8,8 +8,8 @@ $id = $_POST['id'];
 $cafe =  buscaCafeID($conexao,$id);
 $tipos =  listaTipo($conexao);
 ?>
-<h1>Exclusão</h1>
-<form action="cafe_edita.php" method="POST">
+<h1>Excluir Café</h1>
+<form action="cafe_exclusao.php" method="POST">
     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
     <table class="table">
         <tr>
@@ -40,7 +40,7 @@ $tipos =  listaTipo($conexao);
             </td>
         </tr>
         <tr>
-            <td><button class="btn btn-danger" type="submit">Deletar Café</button></td>
+            <td><button class="btn btn-danger" type="submit">Excluir</button></td>
         </tr>
     </table>
 </form>
