@@ -1,2 +1,3 @@
 <?php
-$conexao = mysqli_connect('localhost', 'root', '', 'cafeimetro');
+$conexao = new mysqli('localhost', 'root', '', 'cafeimetro');
+$conexao->set_charset('utf8');

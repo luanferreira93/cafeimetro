@@ -1,6 +1,5 @@
 <?php
 include 'conecta.php';
-include 'cafe_banco.php';
 include 'head_menu.php';
 include 'tipo_banco.php';
 

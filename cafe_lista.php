@@ -9,6 +9,7 @@ include 'cafe_banco.php';
         <tr>
             <?php
             $cafes = listacafe($conexao);
+            arsort($cafes);
             foreach($cafes as $cafe){
             ?>
         <tr>
