@@ -13,3 +13,11 @@ function listaTipo($conexao)
     return $tipos;
 }
 
+function buscaTipo($conexao,$id){
+    $query = "SELECT * FROM tipos WHERE id = ?";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('i',$id);
+    $instrucao->execute();
+    $resultado = $instrucao->get_result();
+    return $resultado->fetch_assoc();
+}
