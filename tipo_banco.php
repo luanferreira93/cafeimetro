@@ -4,9 +4,12 @@ function listaTipo($conexao)
     $tipos = [];
 
     $query = 'SELECT * FROM tipos';
-    $resultado = mysqli_query($conexao, $query);
-    while($tipo = mysqli_fetch_array($resultado)){
+    $instrucao = $conexao->prepare($query);
+    $instrucao->execute();
+    $resultado = $instrucao->get_result();
+    while($tipo = $resultado->fetch_assoc()){
         array_push($tipos,$tipo);
     }
     return $tipos;
 }
+
