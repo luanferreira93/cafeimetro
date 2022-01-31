@@ -17,8 +17,8 @@
         <div class="navbar-nav" id="menu_geral">
             <a class="nav-item nav-link" href="cafe_lista.php">Lista de Cafés</a>
             <a class="nav-item nav-link" href="cafe_form_adicionar.php">Adicionar Cafés</a>
-            <a class="nav-item nav-link" href="lista_tipos.php">Lista Tipos</a>
-            <a class="nav-item nav-link" href="tipo_form_adicionar.php">Adicionar Tipo</a>
+            <a class="nav-item nav-link" href="tipo_lista.php">Lista Tipos</a>
+            <a class="nav-item nav-link" href="tipo_form_adiciona.php">Adicionar Tipo</a>
             <a class="nav-item nav-link" href="lista_consumo.php">Meu Consumo</a>
         </div>
     </nav>
