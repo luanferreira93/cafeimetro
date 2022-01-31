@@ -10,7 +10,7 @@ include 'cafe_banco.php';
             <?php
             $cafes = listacafe($conexao);
             arsort($cafes);
-            foreach($cafes as $cafe){
+            foreach ($cafes as $cafe) {
             ?>
         <tr>
             <td><?= $cafe['nome_cafe'] ?></td>
@@ -23,7 +23,7 @@ include 'cafe_banco.php';
                 </form>
             </td>
             <td>
-            <form name="form_remove" action="cafe_form_remove.php" method="POST">
+                <form name="form_remove" action="cafe_form_remove.php" method="POST">
                     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
                     <button class="btn btn-danger">Excluir</button>
                 </form>
