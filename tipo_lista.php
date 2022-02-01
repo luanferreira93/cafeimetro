@@ -2,6 +2,9 @@
 include 'conecta.php';
 include 'tipo_banco.php';
 include 'head_menu.php';
+
+
+
 ?>
 <table class="table table-striped table-bordered">
     <tbody>
@@ -10,6 +13,8 @@ include 'head_menu.php';
             $tipos = listaTipo($conexao);
             arsort($tipos);
             foreach ($tipos as $tipo) {
+                $vinculado =  vinculoTipoCafe($conexao, $tipo['id']);
+                $desativaBtnRemove = (!$vinculado == 0) ? 'disabled' : '';
             ?>
         <tr>
             <th><?= $tipo['nome'] ?></th>
@@ -22,7 +27,7 @@ include 'head_menu.php';
             <td>
                 <form name="form_remove" action="tipo_form_remove.php" method="POST">
                     <input type="hidden" name="id" value="<?= $tipo['id'] ?>">
-                    <button class="btn btn-danger">Excluir</button>
+                    <button class="btn btn-danger" <?=$desativaBtnRemove?>>Remove</button>
                 </form>
             </td>
         </tr>
@@ -31,6 +36,6 @@ include 'head_menu.php';
     ?>
     </tr>
     </tbody>
-<?php
-include 'footer.php';
-?>
+    <?php
+    include 'footer.php';
+    ?>
