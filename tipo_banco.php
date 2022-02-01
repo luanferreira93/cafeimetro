@@ -28,3 +28,13 @@ function alteraTipo($conexao,$nome,$id){
     $instrucao->bind_param('si',$nome,$id);
     return $instrucao->execute();
 }
+
+function vinculoTipoCafe($conexao,$id){
+    $query = "SELECT COUNT(id) AS qtd FROM cafe WHERE tipo_id = ?";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('i',$id);
+    $instrucao->execute();
+    $resultado = $instrucao->get_result();
+    $count = $resultado->fetch_assoc();
+    return $count['qtd'];
+}

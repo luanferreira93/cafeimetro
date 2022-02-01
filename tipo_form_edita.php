@@ -4,6 +4,9 @@ include 'tipo_banco.php';
 include 'head_menu.php';
 $id = $_POST['id'];
 $tipo =buscaTipo($conexao,$id);
+
+$vinculo = vinculoTipoCafe($conexao,$id);
+$msg = (!$vinculo == 0)?"<b>ATENÇÃO</b>!<br/>Existem Cafés associados a este tipo<br/>Se você confirmar a operação, todos os cafés associados a este tipo serão alterados.":"";
 ?>
 <h1>Altera Tipo</h1>
 <form action="tipo_edita.php" method="POST">
@@ -20,6 +23,9 @@ $tipo =buscaTipo($conexao,$id);
         </tr>
     </table>
 </form>
+<div id="msg-vinculo-cafe">
+<p class="text-danger"><?=$msg?></p>
+</div>
 <?php
 include 'footer.php';
 ?>
