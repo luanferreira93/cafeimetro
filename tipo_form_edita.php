@@ -6,7 +6,7 @@ $id = $_POST['id'];
 $tipo =buscaTipo($conexao,$id);
 ?>
 <h1>Altera Tipo</h1>
-<form action="cafe_edita.php" method="POST">
+<form action="tipo_edita.php" method="POST">
     <input type="hidden" name="id" value="<?= $tipo['id'] ?>">
     <table class="table">
         <tr>

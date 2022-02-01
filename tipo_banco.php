@@ -21,3 +21,10 @@ function buscaTipo($conexao,$id){
     $resultado = $instrucao->get_result();
     return $resultado->fetch_assoc();
 }
+
+function alteraTipo($conexao,$nome,$id){
+    $query = "UPDATE tipos SET nome = ? WHERE id = ?";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('si',$nome,$id);
+    return $instrucao->execute();
+}
