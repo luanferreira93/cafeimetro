@@ -1,5 +1,5 @@
 <?php
-include 'head_menu.php'
+include 'head_menu.php';
 ?>
 <h1>Adiciona Tipo</h1>
 <form action="tipo_adiciona.php" method="POST">

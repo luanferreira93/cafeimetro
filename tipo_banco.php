@@ -52,3 +52,13 @@ function adiciona_tipo($conexao,$nome){
     $instrucao->bind_param('s',$nome);
     return $instrucao->execute();
 }
+
+function tipo_existe($conexao,$nome){
+    $query = "SELECT COUNT(id) AS qtd FROM tipos WHERE nome = ?";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('s',$nome);
+    $instrucao->execute();
+    $resultado = $instrucao->get_result();
+    $count = $resultado->fetch_assoc();
+    return $count['qtd'];
+}
