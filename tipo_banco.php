@@ -45,3 +45,10 @@ function removeTipo($conexao,$id){
     $instrucao->bind_param('i',$id);
     return $instrucao->execute();
 }
+
+function adiciona_tipo($conexao,$nome){
+    $query = "INSERT INTO tipos(nome) VALUES(?)";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('s',$nome);
+    return $instrucao->execute();
+}
