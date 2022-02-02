@@ -38,3 +38,10 @@ function vinculoTipoCafe($conexao,$id){
     $count = $resultado->fetch_assoc();
     return $count['qtd'];
 }
+
+function removeTipo($conexao,$id){
+    $query = "DELETE FROM tipos WHERE id = ?";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('i',$id);
+    return $instrucao->execute();
+}

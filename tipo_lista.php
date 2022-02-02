@@ -2,9 +2,6 @@
 include 'conecta.php';
 include 'tipo_banco.php';
 include 'head_menu.php';
-
-
-
 ?>
 <table class="table table-striped table-bordered">
     <tbody>
