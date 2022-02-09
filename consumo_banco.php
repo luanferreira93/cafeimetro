@@ -11,6 +11,10 @@ function listaConsumo($conexao){
     return $consumos;
 }
 
-function deletaConsumo(){
-    
+function deletaConsumo($conexao,$id){
+    $query = "DELETE FROM consumo WHERE id = ?";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('i',$id);
+    return $instrucao->execute();
 }
+

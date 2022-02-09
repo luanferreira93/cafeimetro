@@ -3,6 +3,10 @@ include 'head_menu.php';
 include 'conecta.php';
 include 'consumo_banco.php';
 ?>
+
+<h1>O que eu já consumi...</h1>
+<button class="btn btn-primary mb-5" onClick="window.location.href='consumo_form_adiciona.php'">Mais café</button>
+
 <table class="table table-striped table-bordered">
     <tbody>
         <tr>
