@@ -18,3 +18,9 @@ function deletaConsumo($conexao,$id){
     return $instrucao->execute();
 }
 
+function adicionaConsumo($conexao,$data,$hora,$cafe,$qtd,$preco,$dia_semana){
+    $query = "INSERT INTO consumo(data,hora,qtd,dia_Semana,preco,cafe_id) VALUES(?,?,?,?,?,?)";
+    $instrucao = $conexao->prepare($query);
+    $instrucao->bind_param('ssisdi',$data,$hora,$qtd,$dia_semana,$preco,$cafe);
+    return $instrucao->execute();
+}

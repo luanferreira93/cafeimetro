@@ -29,7 +29,7 @@ $cafes = listacafe($conexao);
         <tr>
             <td>Cafe</td>
             <td>
-                <select class="form-control" name="tipo_id">
+                <select class="form-control" name="cafe">
                     <?php
                     foreach ($cafes as $cafe) {
                     ?>
