@@ -11,7 +11,8 @@ include 'consumo_banco.php';
     <tbody>
         <tr>
             <?php
-            $consumos= listaConsumo($conexao);
+            $consumos = listaConsumo($conexao);
+            arsort($consumos);
             foreach ($consumos as $consumo) {
             ?>
         <tr>
@@ -20,7 +21,7 @@ include 'consumo_banco.php';
             <td><?= $consumo['dia_semana'] ?></td>
             <td><?= $consumo['cafe_nome'] ?></td>
             <td><?= $consumo['qtd'] ?>ml</td>
-            <td>R$<?=number_format($consumo['preco'],2,',','.'); ?></td>
+            <td>R$<?= number_format($consumo['preco'], 2, ',', '.'); ?></td>
             <td>
                 <form name="form_remove" action="consumo_remove.php" method="POST">
                     <input type="hidden" name="id" value="<?= $consumo['id'] ?>">
