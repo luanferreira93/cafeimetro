@@ -9,23 +9,24 @@ $cafe = buscaCafeID($conexao, $id);
 $tipos = listaTipo($conexao);
 ?>
 <h1>Altera Café</h1>
-<form action="cafe_edita.php" method="POST">
+<form action="cafe_edita.php" method="POST" id="formCafe">
     <input type="hidden" name="id" value="<?= $cafe['id'] ?>">
     <table class="table">
+    <span class="text-danger" id="msg-erro"></span>
         <tr>
-            <td>Nome</td>
+            <td><span class="text-danger">* </span>Nome</td>
             <td>
-                <textarea class="form-control" type="text" name="nome"><?= $cafe['nome'] ?></textarea>
+                <textarea class="form-control" type="text" name="nome" id="nome"><?= $cafe['nome'] ?></textarea>
             </td>
         </tr>
         <tr>
-            <td>Descrição</td>
+            <td><span class="text-danger">* </span>Descrição</td>
             <td>
-                <textarea class="form-control" name="descricao"><?= $cafe['descricao'] ?></textarea>
+                <textarea class="form-control" name="descricao" id="descricao"><?= $cafe['descricao'] ?></textarea>
             </td>
         </tr>
         <tr>
-            <td>Tipo</td>
+            <td><span class="text-danger">* </span>Tipo</td>
             <td>
                 <select class="form-control" name="tipo_id" id="">
                     <?php
@@ -44,6 +45,7 @@ $tipos = listaTipo($conexao);
         </tr>
     </table>
 </form>
+<script src="./js/cafeimetro.js"></script>
 <?php
 include 'footer.php';
 ?>

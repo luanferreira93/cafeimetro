@@ -6,6 +6,8 @@ include 'consumo_banco.php';
 
 <h1>O que eu já consumi...</h1>
 <button class="btn btn-primary mb-5" onClick="window.location.href='consumo_form_adiciona.php'">Mais café</button>
+<button class="btn btn-success mb-5" onClick="window.open(href='consumo_lista_planilha.php','_blank')">Exporta para planilha</button>
+<button class="btn btn-success mb-5" onClick="window.open(href='consumo_lista_report.php')">Relatório</button>
 
 <table class="table table-striped table-bordered">
     <tbody>

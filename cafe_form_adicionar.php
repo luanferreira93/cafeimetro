@@ -6,18 +6,19 @@ include 'tipo_banco.php';
 $tipos = listaTipo($conexao);
 ?>
 <h1>Adiciona Café</h1>
-<form action="cafe_adiciona.php" method="POST">
+<form id="formCafe" method="POST" action="cafe_adiciona.php">
     <table class="table">
+        <span class="text-danger" id="msg-erro"></span>
         <tr>
-            <td>Nome</td>
+            <td><span class="text-danger">* </span>Nome</td>
             <td>
-                <input class="form-control" type="text" name="nome">
+                <input class="form-control" type="text" name="nome" id="nome">
             </td>
         </tr>
         <tr>
-            <td>Descrição</td>
+            <td><span class="text-danger">* </span>Descrição</td>
             <td>
-                <textarea class="form-control" name="descricao"></textarea>
+                <textarea class="form-control" name="descricao" id="descricao"></textarea>
             </td>
         </tr>
         <tr>
@@ -39,6 +40,7 @@ $tipos = listaTipo($conexao);
         </tr>
     </table>
 </form>
+<script src="./js/cafeimetro.js"></script>
 <?php
 include 'footer.php';
 ?>
