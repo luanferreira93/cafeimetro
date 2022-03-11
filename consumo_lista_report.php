@@ -1,10 +1,11 @@
 <?php
+date_default_timezone_set('Brazil/East');
 include 'conecta.php';
 include 'consumo_banco.php';
 $valor_total = 0;
 $ml_total = 0;
 $cafe_total = 0;
-$data_hoje = date('d/m/Y H:m:s');
+$data_hoje = date('d/m/Y H:i:s');
 
 ?>
 
@@ -21,10 +22,14 @@ $data_hoje = date('d/m/Y H:m:s');
 </head>
 
 <body>
-    <div class="container">
-        <div class="principal">
-            <h3>Relatório de consumo <?=$data_hoje?></h3>
+    <div class="container principal">
+        <form name="form_pdf" method="POST" action="" id="form_pdf">
+            <input type="hidden" name="html" id="html" value="">
+            <button class="btn btn-primary d-flex" id="btn_gerapdf" onClick="gerapdf()">Gerar PDF</button>
+        </form>
+        <div class="principal" id="html_principal">
             <table class="table">
+                <h3>Relatório de consumo <?=$data_hoje?></h3>
                 <tbody>
                     <tr>
                         <?php
@@ -58,6 +63,15 @@ $data_hoje = date('d/m/Y H:m:s');
             </table>
         </div>
     </div>
+
+    <script>
+        function gerapdf(){
+            const form = document.getElementById('form_pdf')
+            document.getElementById('html').value =  document.getElementById('html_principal').innerHTML
+           form.action = 'gerador_pdf.php';
+           form.submit();
+        }
+    </script>
 
     <body />
     <html />

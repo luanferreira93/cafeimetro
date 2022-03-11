@@ -37,7 +37,7 @@ class Helpers
         return null;
     }
 
-    /**
+      /**
      * builds a full url given a protocol, hostname, base path and url
      *
      * @param string $protocol
@@ -57,34 +57,25 @@ class Helpers
     public static function build_url($protocol, $host, $base_path, $url)
     {
         $protocol = mb_strtolower($protocol);
-        if ($url === "") {
+        if (strlen($url) == 0) {
             //return $protocol . $host . rtrim($base_path, "/\\") . "/";
             return $protocol . $host . $base_path;
         }
 
         // Is the url already fully qualified, a Data URI, or a reference to a named anchor?
-        // File-protocol URLs may require additional processing (e.g. for URLs with a relative path)
-        if ((mb_strpos($url, "://") !== false && substr($url, 0, 7) !== "file://") || mb_substr($url, 0, 1) === "#" || mb_strpos($url, "data:") === 0 || mb_strpos($url, "mailto:") === 0 || mb_strpos($url, "tel:") === 0) {
+        if (mb_strpos($url, "://") !== false || mb_substr($url, 0, 1) === "#" || mb_strpos($url, "data:") === 0 || mb_strpos($url, "mailto:") === 0 || mb_strpos($url, "tel:") === 0) {
             return $url;
         }
 
-        if (strpos($url, "file://") === 0) {
-            $url = substr($url, 7);
-            $protocol = "";
-        }
+        $ret = $protocol;
 
-        $ret = "";
-        if ($protocol !== "file://") {
-            $ret = $protocol;
-        }
-
-        if (!in_array(mb_strtolower($protocol), ["http://", "https://", "ftp://", "ftps://"], true)) {
+        if (!in_array(mb_strtolower($protocol), ["http://", "https://", "ftp://", "ftps://"])) {
             //On Windows local file, an abs path can begin also with a '\' or a drive letter and colon
             //drive: followed by a relative path would be a drive specific default folder.
             //not known in php app code, treat as abs path
             //($url[1] !== ':' || ($url[2]!=='\\' && $url[2]!=='/'))
             if ($url[0] !== '/' && (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN' || (mb_strlen($url) > 1 && $url[0] !== '\\' && $url[1] !== ':'))) {
-                // For rel path and local access we ignore the host, and run the path through realpath()
+                // For rel path and local acess we ignore the host, and run the path through realpath()
                 $ret .= realpath($base_path) . '/';
             }
             $ret .= $url;
@@ -104,27 +95,6 @@ class Helpers
             //$base_path = $base_path !== "" ? rtrim($base_path, "/\\") . "/" : "";
             $ret .= $host . $base_path . $url;
         }
-
-        // URL should now be complete, final cleanup
-        $parsed_url = parse_url($ret);
-
-        // reproduced from https://www.php.net/manual/en/function.parse-url.php#106731
-        $scheme   = isset($parsed_url['scheme']) ? $parsed_url['scheme'] . '://' : '';
-        $host     = isset($parsed_url['host']) ? $parsed_url['host'] : '';
-        $port     = isset($parsed_url['port']) ? ':' . $parsed_url['port'] : '';
-        $user     = isset($parsed_url['user']) ? $parsed_url['user'] : '';
-        $pass     = isset($parsed_url['pass']) ? ':' . $parsed_url['pass']  : '';
-        $pass     = ($user || $pass) ? "$pass@" : '';
-        $path     = isset($parsed_url['path']) ? $parsed_url['path'] : '';
-        $query    = isset($parsed_url['query']) ? '?' . $parsed_url['query'] : '';
-        $fragment = isset($parsed_url['fragment']) ? '#' . $parsed_url['fragment'] : '';
-        
-        // partially reproduced from https://stackoverflow.com/a/1243431/264628
-        /* replace '//' or '/./' or '/foo/../' with '/' */
-        $re = array('#(/\.?/)#', '#/(?!\.\.)[^/]+/\.\./#');
-        for ($n=1; $n>0; $path=preg_replace($re, '/', $path, -1, $n)) {}
-
-        $ret = "$scheme$user$pass$host$port$path$query$fragment";
 
         return $ret;
     }
@@ -157,19 +127,14 @@ class Helpers
     }
 
     /**
-     * Converts decimal numbers to roman numerals.
+     * Converts decimal numbers to roman numerals
      *
-     * As numbers larger than 3999 (and smaller than 1) cannot be represented in
-     * the standard form of roman numerals, those are left in decimal form.
-     *
-     * See https://en.wikipedia.org/wiki/Roman_numerals#Standard_form
-     *
-     * @param int|string $num
+     * @param int $num
      *
      * @throws Exception
      * @return string
      */
-    public static function dec2roman($num): string
+    public static function dec2roman($num)
     {
 
         static $ones = ["", "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix"];
@@ -181,8 +146,8 @@ class Helpers
             throw new Exception("dec2roman() requires a numeric argument.");
         }
 
-        if ($num >= 4000 || $num <= 0) {
-            return (string) $num;
+        if ($num > 4000 || $num < 0) {
+            return "(out of range)";
         }
 
         $num = strrev((string)$num);
@@ -209,31 +174,15 @@ class Helpers
     }
 
     /**
-     * Restrict a length to the given range.
-     *
-     * If min > max, the result is min.
-     *
-     * @param float $length
-     * @param float $min
-     * @param float $max
-     *
-     * @return float
-     */
-    public static function clamp(float $length, float $min, float $max): float
-    {
-        return max($min, min($length, $max));
-    }
-
-    /**
      * Determines whether $value is a percentage or not
      *
-     * @param string|float|int $value
+     * @param float $value
      *
      * @return bool
      */
-    public static function is_percent($value): bool
+    public static function is_percent($value)
     {
-        return is_string($value) && false !== mb_strpos($value, "%");
+        return false !== mb_strpos($value, "%");
     }
 
     /**
@@ -296,7 +245,7 @@ class Helpers
      * http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_6x0u.asp
      *
      * @param string $str Data to decode
-     * @param int $width Image width
+     * @param integer $width Image width
      *
      * @return string
      */
@@ -349,7 +298,7 @@ class Helpers
      * see http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_6x0u.asp
      *
      * @param string $str Data to decode
-     * @param int $width Image width
+     * @param integer $width Image width
      *
      * @return string
      */
@@ -635,8 +584,7 @@ class Helpers
      *
      * @param string $filename
      * @param resource $context
-     * @return array An array of three elements: width and height as
-     *         `float|int`, and image type as `string|null`.
+     * @return array The same format as getimagesize($filename)
      */
     public static function dompdf_getimagesize($filename, $context = null)
     {
@@ -654,33 +602,32 @@ class Helpers
             IMAGETYPE_GIF  => "gif",
             IMAGETYPE_BMP  => "bmp",
             IMAGETYPE_PNG  => "png",
-            IMAGETYPE_WEBP => "webp",
         ];
 
-        $type = $types[$type] ?? null;
+        $type = isset($types[$type]) ? $types[$type] : null;
 
         if ($width == null || $height == null) {
-            [$data] = Helpers::getFileContent($filename, $context);
+            [$data, $headers] = Helpers::getFileContent($filename, $context);
 
-            if ($data !== null) {
+            if (!empty($data)) {
                 if (substr($data, 0, 2) === "BM") {
-                    $meta = unpack("vtype/Vfilesize/Vreserved/Voffset/Vheadersize/Vwidth/Vheight", $data);
-                    $width = (int) $meta["width"];
-                    $height = (int) $meta["height"];
+                    $meta = unpack('vtype/Vfilesize/Vreserved/Voffset/Vheadersize/Vwidth/Vheight', $data);
+                    $width = (int)$meta['width'];
+                    $height = (int)$meta['height'];
                     $type = "bmp";
-                } elseif (strpos($data, "<svg") !== false) {
-                    $doc = new \Svg\Document();
-                    $doc->loadFile($filename);
+                } else {
+                    if (strpos($data, "<svg") !== false) {
+                        $doc = new \Svg\Document();
+                        $doc->loadFile($filename);
 
-                    [$width, $height] = $doc->getDimensions();
-                    $width = (float) $width;
-                    $height = (float) $height;
-                    $type = "svg";
+                        [$width, $height] = $doc->getDimensions();
+                        $type = "svg";
+                    }
                 }
             }
         }
 
-        return $cache[$filename] = [$width ?? 0, $height ?? 0, $type];
+        return $cache[$filename] = [$width, $height, $type];
     }
 
     /**
@@ -877,8 +824,8 @@ class Helpers
     {
         $content = null;
         $headers = null;
-        [$protocol] = Helpers::explode_url($uri);
-        $is_local_path = ($protocol === "" || $protocol === "file://");
+        [$proto, $host, $path, $file] = Helpers::explode_url($uri);
+        $is_local_path = ($proto == '' || $proto === 'file://');
 
         set_error_handler([self::class, 'record_warnings']);
 
@@ -888,9 +835,9 @@ class Helpers
                     $uri = Helpers::encodeURI($uri);
                 }
                 if (isset($maxlen)) {
-                    $result = file_get_contents($uri, false, $context, $offset, $maxlen);
+                    $result = file_get_contents($uri, null, $context, $offset, $maxlen);
                 } else {
-                    $result = file_get_contents($uri, false, $context, $offset);
+                    $result = file_get_contents($uri, null, $context, $offset);
                 }
                 if ($result !== false) {
                     $content = $result;
@@ -931,12 +878,7 @@ class Helpers
         return [$content, $headers];
     }
 
-    /**
-     * @param string $str
-     * @return string
-     */
-    public static function mb_ucwords(string $str): string
-    {
+    public static function mb_ucwords($str) {
         $max_len = mb_strlen($str);
         if ($max_len === 1) {
             return mb_strtoupper($str);
@@ -961,68 +903,5 @@ class Helpers
         }
 
         return $str;
-    }
-
-    /**
-     * Check whether two lengths should be considered equal, accounting for
-     * inaccuracies in float computation.
-     *
-     * The implementation relies on the fact that we are neither dealing with
-     * very large, nor with very small numbers in layout. Adapted from
-     * https://floating-point-gui.de/errors/comparison/.
-     *
-     * @param float $a
-     * @param float $b
-     *
-     * @return bool
-     */
-    public static function lengthEqual(float $a, float $b): bool
-    {
-        // The epsilon results in a precision of at least:
-        // * 7 decimal digits at around 1
-        // * 4 decimal digits at around 1000 (around the size of common paper formats)
-        // * 2 decimal digits at around 100,000 (100,000pt ~ 35.28m)
-        static $epsilon = 1e-8;
-        static $almostZero = 1e-12;
-
-        $diff = abs($a - $b);
-
-        if ($a === $b || $diff < $almostZero) {
-            return true;
-        }
-
-        return $diff < $epsilon * max(abs($a), abs($b));
-    }
-
-    /**
-     * Check `$a < $b`, accounting for inaccuracies in float computation.
-     */
-    public static function lengthLess(float $a, float $b): bool
-    {
-        return $a < $b && !self::lengthEqual($a, $b);
-    }
-
-    /**
-     * Check `$a <= $b`, accounting for inaccuracies in float computation.
-     */
-    public static function lengthLessOrEqual(float $a, float $b): bool
-    {
-        return $a <= $b || self::lengthEqual($a, $b);
-    }
-
-    /**
-     * Check `$a > $b`, accounting for inaccuracies in float computation.
-     */
-    public static function lengthGreater(float $a, float $b): bool
-    {
-        return $a > $b && !self::lengthEqual($a, $b);
-    }
-
-    /**
-     * Check `$a >= $b`, accounting for inaccuracies in float computation.
-     */
-    public static function lengthGreaterOrEqual(float $a, float $b): bool
-    {
-        return $a >= $b || self::lengthEqual($a, $b);
     }
 }
