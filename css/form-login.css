@@ -1,0 +1,34 @@
+
+
+.container-form{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.border{
+    border: 1px solid rgb(146, 141, 141);
+}
+
+.form-login{
+    width: 400px;
+    height: 200px;
+    padding: 20px;
+}
+
+.form-login form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-login form input{
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.form-login button{
+    padding: 10px;
+    font-weight: 400;
+}
+
