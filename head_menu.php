@@ -1,3 +1,7 @@
+<?php
+include './usuario.php';
+?>
+
 <!DOCTYPE html>
 <html lang="pt_BR">
 
@@ -19,7 +23,11 @@
             <a class="nav-item nav-link" href="cafe_form_adicionar.php">Adicionar Cafés</a>
             <a class="nav-item nav-link" href="tipo_lista.php">Lista Tipos</a>
             <a class="nav-item nav-link" href="tipo_form_adiciona.php">Adicionar Tipo</a>
-            <a class="nav-item nav-link" href="consumo_lista.php">Meu Consumo</a>
+            <a class="nav-item nav-link" href="consumo_lista.php">Meu Consumo | </a>
+            <span class="navbar-text">
+                Usuário: <?php echo $_SESSION['USUARIO']['EMAIL']?>
+            </span>
+            <a class="nav-item nav-link" href="logout.php"> | SAIR</a>
         </div>
     </nav>
 
